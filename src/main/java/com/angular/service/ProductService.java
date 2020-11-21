@@ -25,7 +25,7 @@ public class ProductService {
 		return repository.findById(id);
 	}
 	
-	public Optional<Product> getName(String name){
+	public Optional<Product> getByName(String name){
 		return repository.findByName(name);
 	}
 	
@@ -37,7 +37,7 @@ public class ProductService {
 		repository.deleteById(id);
 	}
 	
-	public boolean existsByid(Long id) {
+	public boolean existsById(Long id) {
 		return repository.existsById(id);
 	}
 	

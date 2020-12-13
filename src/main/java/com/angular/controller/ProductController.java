@@ -40,7 +40,7 @@ public class ProductController {
     public ResponseEntity<Product> getById(@PathVariable("id") long id){
         if(!productService.existsById(id))
             return new ResponseEntity(new Message("Não Existe"), HttpStatus.NOT_FOUND);
-        Product producto = productService.getId(id).get();
+        Product producto = productService.getById(id).get();
         return new ResponseEntity(producto, HttpStatus.OK);
     }
     
@@ -62,7 +62,7 @@ public class ProductController {
             return new ResponseEntity(new Message("Já existe"), HttpStatus.BAD_REQUEST);
         
         Product product = new Product(null, productDto.getName(), productDto.getPrice());
-        productService.save(product);
+        productService.saveByProduct(product);
         return new ResponseEntity(new Message("Produto criado"), HttpStatus.OK);
     }
     
@@ -77,10 +77,10 @@ public class ProductController {
         if(productDto.getPrice() < 0 )
             return new ResponseEntity(new Message("Preço maior que 0"), HttpStatus.BAD_REQUEST);
 
-        Product product = productService.getId(id).get();
+        Product product = productService.getById(id).get();
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
-        productService.save(product);
+        productService.saveByProduct(product);
         return new ResponseEntity(new Message("Produto atualizado"), HttpStatus.OK);
     }
     
@@ -88,7 +88,7 @@ public class ProductController {
     public ResponseEntity<?> delete(@PathVariable("id")long id){
         if(!productService.existsById(id))
             return new ResponseEntity(new Message("Não existe"), HttpStatus.NOT_FOUND);
-        productService.delete(id);
+        productService.deleteByProduct(id);
         return new ResponseEntity(new Message("Produto removido"), HttpStatus.OK);
     }
 

@@ -1,19 +1,27 @@
 package com.angular.dto;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-public class ProductRequestDto {
+public class ProductRequestDto implements Serializable{
 	
-    @NotBlank
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@NotBlank
     private String name;
-    @Min(0)
-    private long price;
+	
+    @Min(0) // Valor não pode ser menor do que 0
+    private Long price;
 
     public ProductRequestDto() {
     }
 
-    public ProductRequestDto(@NotBlank String name, @Min(0) long price) {
+    public ProductRequestDto(@NotBlank String name, @Min(0) Long price) {
         this.name = name;
         this.price = price;
     }
@@ -30,7 +38,7 @@ public class ProductRequestDto {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
     
